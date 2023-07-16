@@ -88,6 +88,3 @@ class ColourPicker():
         video_capture.release()
         cv2.destroyAllWindows()
     
-if __name__ == "__main__":
-    colour_picker = ColourPicker()
-    colour_picker.run()
