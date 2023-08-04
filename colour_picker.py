@@ -44,6 +44,7 @@ class ColourPicker():
         cv2.namedWindow("TrackBars")
         cv2.resizeWindow("TrackBars", 640, 240)
         cv2.namedWindow("Colour Picker", cv2.WINDOW_NORMAL)
+        cv2.resizeWindow("Colour Picker", self.width * 3, self.height)
         
     def create_trackbars(self):
         cv2.createTrackbar("Hue Min", "TrackBars", 0, 179, lambda x: None)
@@ -78,9 +79,8 @@ class ColourPicker():
             mask = cv2.resize(mask, (self.width, self.height))
             colour_mask = cv2.resize(colour_mask, (self.width, self.height))
 
-            top_row = np.concatenate((frame, img_HSV), axis=1)
-            bottom_row = np.concatenate((mask, colour_mask), axis=1)
-            composite_image = np.concatenate((top_row, bottom_row), axis=0)
+            row = np.concatenate((frame, mask, colour_mask), axis=1)
+            composite_image = row
 
             return composite_image
 
